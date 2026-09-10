@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vida em Equilíbrio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- TELA 1: MENU INICIAL -->
+  <section id="screen-menu" class="screen active">
+    <div class="menu-wrap">
+      <div class="menu-glyph" aria-hidden="true">
+        <svg viewBox="0 0 120 120" width="88" height="88">
+          <circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="2"/>
+          <path d="M60 8 A52 52 0 0 1 60 112" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="60" cy="60" r="8" fill="var(--accent)"/>
+        </svg>
+      </div>
+      <p class="eyebrow-free">um jogo sobre escolhas e limites</p>
+      <h1>Vida em<br>Equilíbrio</h1>
+      <p class="menu-sub">Sete dias. Uma rotina. Nenhuma resposta certa.</p>
+      <div class="menu-actions">
+        <button class="btn btn-primary" id="btn-start">Começar semana</button>
+        <button class="btn btn-ghost" id="btn-how">Como funciona</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TELA 2: INTRODUÇÃO -->
+  <section id="screen-intro" class="screen">
+    <div class="card-panel intro-panel">
+      <h2>Antes de começar</h2>
+      <p class="intro-quote">"Você não consegue fazer tudo. Precisa escolher o que realmente importa."</p>
+      <div class="intro-grid">
+        <div class="intro-item"><span class="ii-icon">❤️</span><div><strong>Saúde Física</strong><p>Alimentação, exercício, sono e hábitos.</p></div></div>
+        <div class="intro-item"><span class="ii-icon">🧠</span><div><strong>Saúde Mental</strong><p>Descanso, estresse, lazer e relações.</p></div></div>
+        <div class="intro-item"><span class="ii-icon">😴</span><div><strong>Sono</strong><p>Qualidade e regularidade do descanso.</p></div></div>
+        <div class="intro-item"><span class="ii-icon">📚</span><div><strong>Estudos</strong><p>Desempenho acadêmico ao longo da semana.</p></div></div>
+        <div class="intro-item"><span class="ii-icon">🏃</span><div><strong>Atividade Física</strong><p>Frequência e qualidade dos treinos.</p></div></div>
+        <div class="intro-item"><span class="ii-icon">👥</span><div><strong>Vida Social</strong><p>Amizades, família e conexão.</p></div></div>
+      </div>
+      <p class="intro-note">Cada decisão custa tempo e energia — e nem sempre existe a opção "perfeita". O que importa é o equilíbrio no fim da semana, não a perfeição em um único dia.</p>
+      <button class="btn btn-primary" id="btn-to-objectives">Definir a semana</button>
+    </div>
+  </section>
+
+  <!-- TELA 3: OBJETIVOS PESSOAIS -->
+  <section id="screen-objectives" class="screen">
+    <div class="card-panel">
+      <h2>Seus objetivos desta semana</h2>
+      <p class="intro-note">Três metas foram sorteadas para você. Cumpri-las rende pontos extras no fim da semana — mas não é obrigatório.</p>
+      <div id="objectives-list" class="objectives-list"></div>
+      <button class="btn btn-primary" id="btn-to-game">Iniciar Dia 1</button>
+    </div>
+  </section>
+
+  <!-- TELA 4: JOGO -->
+  <section id="screen-game" class="screen">
+    <header class="hud">
+      <div class="hud-top">
+        <div class="hud-day">
+          <span id="hud-day-label">Dia 1</span>
+          <span id="hud-period-label" class="hud-period">Manhã</span>
+        </div>
+        <div class="hud-time">
+          <span class="hud-time-label">Tempo livre</span>
+          <span id="hud-time-value">5h00</span>
+        </div>
+      </div>
+      <div class="hud-bars" id="hud-bars"></div>
+      <div class="hud-vitals" id="hud-vitals"></div>
+    </header>
+
+    <main class="event-area">
+      <div class="event-card" id="event-card">
+        <div id="event-body">
+          <p class="event-tag" id="event-tag">Situação</p>
+          <p class="event-text" id="event-text">Carregando...</p>
+          <p class="think-hint" id="think-hint">Pense com calma antes de decidir…</p>
+          <div class="event-options" id="event-options"></div>
+        </div>
+        <div class="event-outcome" id="event-outcome">
+          <p class="outcome-title" id="outcome-title"></p>
+          <div class="outcome-chips" id="outcome-chips"></div>
+          <p class="outcome-tip" id="outcome-tip"></p>
+          <button class="btn btn-primary btn-continue" id="btn-continue-event">Continuar</button>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- TELA 4b: DECISÃO DE SONO -->
+  <section id="screen-sleep" class="screen">
+    <div class="card-panel sleep-panel">
+      <h2>Fim do dia — hora de dormir</h2>
+      <p class="intro-note" id="sleep-context">É noite. Quantas horas você vai dormir?</p>
+      <div class="sleep-options" id="sleep-options"></div>
+    </div>
+  </section>
+
+  <!-- TELA 5: RESUMO DIÁRIO -->
+  <section id="screen-daysummary" class="screen">
+    <div class="card-panel">
+      <h2 id="ds-title">Resumo do Dia 1</h2>
+      <div class="ds-grid" id="ds-grid"></div>
+      <div class="ds-changes" id="ds-changes"></div>
+      <button class="btn btn-primary" id="btn-next-day">Continuar</button>
+    </div>
+  </section>
+
+  <!-- TELA 6: RESULTADO FINAL -->
+  <section id="screen-result" class="screen">
+    <div class="card-panel result-panel">
+      <p class="eyebrow-free">sua semana</p>
+      <h2>Resultado final</h2>
+      <div class="score-hero">
+        <span id="score-value">0</span><span class="score-max">/1000</span>
+      </div>
+      <p class="rank-badge" id="rank-badge">—</p>
+      <p class="rank-message" id="rank-message"></p>
+
+      <h3 class="result-sub">Evolução da semana</h3>
+      <div class="evo-table" id="evo-table"></div>
+
+      <h3 class="result-sub">Índices</h3>
+      <div class="idx-row" id="idx-row"></div>
+
+      <h3 class="result-sub">Objetivos</h3>
+      <div id="obj-final" class="objectives-list"></div>
+
+      <div class="strengths-grid">
+        <div>
+          <h4>Pontos fortes</h4>
+          <ul id="strengths-list"></ul>
+        </div>
+        <div>
+          <h4>Pode melhorar</h4>
+          <ul id="weaknesses-list"></ul>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btn-restart">Jogar novamente</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
